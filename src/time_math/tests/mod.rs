@@ -54,3 +54,8 @@ fn test_exec() {
     compare_exec("12h34m+56m-10m", "13h20m");
     compare_exec("2h-1.5h", "0h30m");
 }
+
+#[test]
+fn test_ignore_spaces() {
+    compare_exec("12m +    1h   -   1h", "0h12m")
+}

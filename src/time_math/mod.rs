@@ -1,6 +1,7 @@
 use nom::IResult;
 use nom::bytes::complete::tag;
 use nom::branch::alt;
+use nom::character::complete::space0;
 use crate::time_math::types::{Duration, Operator};
 use crate::time_math::types::Operator::{Plus, Minus};
 use const_parser::literal;
@@ -17,8 +18,8 @@ mod tests;
 
 fn operator(i: &str) -> IResult<&str, Operator> {
     alt((
-        map(tag("+"), |_| Plus),
-        map(tag("-"), |_| Minus),
+        map(tuple((space0, tag("+"), space0)), |_| Plus),
+        map(tuple((space0, tag("-"), space0)), |_| Minus),
     ))(i)
 }
 
